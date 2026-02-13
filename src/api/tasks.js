@@ -5,7 +5,13 @@ async function handleResponse(res) {
     const text = await res.text();
     throw new Error(text || res.statusText);
   }
-  return res.status === 204 ? null : res.json();
+  const text = await res.text();
+  
+  if (!text) {
+    return null;
+  }
+  
+  return JSON.parse(text);
 }
 
 export async function getTasks() {
@@ -38,7 +44,7 @@ export async function editTask(id, status) {
   const res = await fetch(`${BASE}EditTask`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: payload //JSON.stringify(payload),
+    body: payload
   });
   return handleResponse(res);
 }

@@ -6,7 +6,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const emptyForm = { title: '', description: '', status: 'Todo', dueDateTime: '' };
+  const emptyForm = { title: '', description: '', status: 'Started', dueDateTime: '' };
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -84,7 +84,7 @@ function App() {
     setForm({
       title: task.title || '',
       description: task.description || '',
-      status: task.status || 'Todo',
+      status: task.status || 'Started',
       dueDateTime: toInputDateTime(task.dueDateTime),
     });
     setSelectedTask(null);
@@ -102,7 +102,7 @@ function App() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>Tasks (API-backed)</h2>
+      <h2>Case Worker Tasks(Demo)</h2>
       {error && <div style={{ color: 'red' }}>{error}</div>}
 
       <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
